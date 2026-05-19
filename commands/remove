@@ -1,0 +1,33 @@
+<?php
+
+require_once __DIR__ . '/../functions/database.php';
+
+$id = $argv[1] ?? null;
+
+$db = db_connect();
+
+if (!empty($id)) {
+    // Obter playlist
+    $playlist = db_query($db, 'SELECT * FROM playlists WHERE deezer_id = :deezer_id', [
+        ':deezer_id' => $id,
+    ])[0] ?? null;
+
+    if (empty($playlist)) {
+        echo 'Playlist não encontrada no banco de dados' . PHP_EOL;
+        exit;
+    }
+
+    // Remover músicas
+    db_query($db, 'DELETE FROM songs WHERE playlist_id = :playlist_id', [
+        ':playlist_id' => $playlist['id'],
+    ]);
+
+    // Remover playlist
+    db_query($db, 'DELETE FROM playlists WHERE id = :id', [
+        ':id' => $playlist['id'],
+    ]);
+
+    echo 'Playlist removida: ' . $playlist['name'] . PHP_EOL;
+} else {
+    echo 'ID da playlist não informado' . PHP_EOL;
+}

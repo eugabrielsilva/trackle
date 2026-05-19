@@ -1,19 +1,46 @@
 <?php
 
-require_once __DIR__ . '/database.php';
-require_once __DIR__ . '/curl.php';
+require_once __DIR__ . '/../functions/database.php';
+require_once __DIR__ . '/../functions/curl.php';
+
+$id = $argv[1] ?? null;
 
 $url_playlist = 'https://api.deezer.com/playlist/';
 
 $db = db_connect();
 
-$playlists = db_query($db, 'SELECT * FROM playlists');
+if (!empty($id)) {
+    // Obter playlist
+    $playlist = db_query($db, 'SELECT * FROM playlists WHERE deezer_id = :deezer_id', [
+        ':deezer_id' => $id,
+    ])[0] ?? null;
 
-foreach ($playlists as $playlist) {
-    echo 'Atualizando playlist: ' . $playlist['name'] . PHP_EOL;
+    if (empty($playlist)) {
+        echo 'Playlist não encontrada no banco de dados' . PHP_EOL;
+        exit;
+    }
+
+    updatePlaylist($playlist, $url_playlist, $db);
+} else {
+    // Obter todas as playlists
+    $playlists = db_query($db, 'SELECT * FROM playlists');
+
+    foreach ($playlists as $playlist) {
+        updatePlaylist($playlist, $url_playlist, $db);
+    }
+}
+
+function updatePlaylist($playlist, $url_playlist, $db)
+{
+    echo 'Atualizando playlist: ' . $playlist['name'];
 
     // Obter playlist
     $data = curl_get($url_playlist . $playlist['deezer_id']);
+
+    if (empty($data) || !empty($data['error'])) {
+        echo ' - ERRO AO BUSCAR NA API' . PHP_EOL;
+        exit;
+    }
 
     // Atualiza a playlist
     db_query($db, 'UPDATE playlists SET name = :name, picture_url = :picture_url WHERE id = :id', [
@@ -51,4 +78,6 @@ foreach ($playlists as $playlist) {
             ]);
         }
     }
+
+    echo ' - OK' . PHP_EOL;
 }
