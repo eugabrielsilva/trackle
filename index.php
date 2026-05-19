@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/functions/database.php';
 $db = db_connect();
-$playlists = db_query($db, 'SELECT * FROM playlists');
+$playlists = db_query($db, 'SELECT * FROM playlists ORDER BY RANDOM()');
 
 ?>
 
@@ -28,14 +28,14 @@ $playlists = db_query($db, 'SELECT * FROM playlists');
             <div class="col-lg-8">
                 <h1 class="mb-2">Trackle</h1>
                 <h2 class="mb-4">Escolha sua playlist favorita:</h2>
-                <div class="row justify-content-center g-3">
-                    <div class="col-6 col-md-4 col-xl-3">
+                <div class="row g-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <a href="daily">
                             <img src="assets/daily.png" alt="Desafio Diário" class="w-100 border border-secondary">
                         </a>
                     </div>
                     <?php foreach ($playlists as $playlist): ?>
-                        <div class="col-6 col-md-4 col-xl-3">
+                        <div class="col-6 col-sm-4 col-md-3">
                             <a href="playlist/<?= $playlist['id'] ?>">
                                 <img src="<?= $playlist['picture_url'] ?>" alt="<?= $playlist['name'] ?>" class="w-100 border border-secondary">
                             </a>

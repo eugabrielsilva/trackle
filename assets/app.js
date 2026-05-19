@@ -6,11 +6,11 @@ $(function() {
     const $btnSubmit = $('#submit');
     const $btnSkip = $('#skip');
     const $btnReplay = $('#replay');
-    const $btnListen = $('#listen');
     const $btnShare = $('#share');
     const $btnHelp = $('#help');
     const $inputSearch = $('#input');
     const $txtCountdown = $('#countdown');
+    const $txtStreak = $('#streak');
     const $btnsShare = $('.btn-share');
 
     const playlistId = $('body').attr('data-playlist-id');
@@ -25,6 +25,7 @@ $(function() {
     let options = [];
     let selectedOption = null;
     let dailyInfo = null;
+    let streak = {};
 
     $('[data-bs-toggle="tooltip"]').tooltip();
 
@@ -36,6 +37,36 @@ $(function() {
         updateGuesses();
         loadMusic();
         showTutorial();
+        loadStreak();
+    }
+
+    /**
+     * Carregar pontuação.
+     */
+    function loadStreak() {
+        const data = localStorage.getItem('streak');
+
+        if(data) {
+            streak = JSON.parse(data);
+        }
+
+        $txtStreak.text(`Sequência atual: ${streak[playlistId] || 0}`);
+    }
+
+    /**
+     * Atualizar pontuação.
+     */
+    function updateStreak(reset = false) {
+        if(reset) {
+            streak[playlistId] = 0;
+        } else if(streak[playlistId]) {
+            streak[playlistId]++;
+        } else {
+            streak[playlistId] = 1;
+        }
+
+        localStorage.setItem('streak', JSON.stringify(streak));
+        $txtStreak.text(`Sequência atual: ${streak[playlistId] || 0}`);
     }
 
     /**
@@ -109,7 +140,13 @@ $(function() {
 
             $.getJSON(`list?playlist_id=${playlistId}`, listResponse => {
                 options = listResponse;
+            }).fail(error => {
+                alert('Erro ao carregar a lista de músicas. Por favor, tente novamente mais tarde.');
+                console.error(error);
             });
+        }).fail(error => {
+            alert('Erro ao carregar a música. Por favor, tente novamente mais tarde.');
+            console.error(error);
         });
     }
 
@@ -195,7 +232,7 @@ $(function() {
                 const name = normalizeString(`${option.name} - ${option.artist}`);
                 const search = normalizeString(searchQuery);
                 return name.includes(search);
-            });
+            }).slice(0, 10);
 
             if(filteredOptions.length) {
                 $optionsContainer.removeClass('d-none');
@@ -286,9 +323,11 @@ $(function() {
         if(guesses.some(guess => guess.correct)) {
             saveDailyInfo(true);
             endGame(true);
+            updateStreak();
         } else if(currentGuess === 10) {
             saveDailyInfo(false, true);
             endGame();
+            updateStreak(true);
         } else {
             saveDailyInfo();
             currentGuess++;
@@ -307,11 +346,12 @@ $(function() {
         $('#result-img').attr('src', answer.picture_url);
         $('#result-name').text(answer.name);
         $('#result-artist').text(answer.artist);
+        $('#result-url').attr('href', `https://www.deezer.com/track/${answer.deezer_id}`);
 
         if(win) {
-            $('#modal-title').text('Você acertou!');
+            $('#modal-title').text('Você acertou! 🎉');
         } else {
-            $('#modal-title').text('Você perdeu!');
+            $('#modal-title').text('Você perdeu! 😔');
         }
 
         if(!dailyInfo?.win && !dailyInfo?.loss) {
@@ -392,10 +432,6 @@ $(function() {
         } else {
             stopAudio();
         }
-    });
-
-    $btnListen.on('click', function() {
-        window.open(`https://www.deezer.com/track/${answer.deezer_id}`, '_blank');
     });
 
     $btnShare.on('click', function() {

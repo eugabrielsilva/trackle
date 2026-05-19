@@ -44,7 +44,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
 <body class="bg-dark text-white" data-playlist-id="<?= $playlist['id']; ?>">
     <div class="container text-center">
         <div class="row justify-content-center">
-            <div class="col-xl-6 position-relative">
+            <div class="col-lg-6 position-relative">
                 <h1 class="mb-2">Trackle</h1>
                 <button class="btn btn-help" id="help" data-bs-toggle="tooltip" title="AJUDA">
                     <i class="fas fa-question-circle"></i>
@@ -82,10 +82,13 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <h1 class="mb-4" id="modal-title"></h1>
-                    <img src="" id="result-img" class="w-100 img-cover mb-4">
-                    <h4 id="result-name"></h4>
-                    <h5 class="mb-4" id="result-artist"></h5>
+                    <h1 class="mb-2" id="modal-title">Você acertou! 🎉</h1>
+                    <h5 id="streak" class="mb-4">Sequência atual: 0</h5>
+                    <a href="" id="result-url" class="d-block text-decoration-none text-white" target="_blank">
+                        <img src="" id="result-img" class="w-100 img-cover mb-4">
+                        <h4 id="result-name"></h4>
+                        <h5 class="mb-4" id="result-artist"></h5>
+                    </a>
                     <div class="d-flex gap-3 justify-content-center">
                         <?php if ($playlist['id'] !== 'daily') : ?>
                             <button class="btn btn-lg btn-primary" id="replay">
@@ -97,9 +100,6 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                                 Próximo em <span id="countdown"></span>
                             </button>
                         <?php endif; ?>
-                        <button class="btn btn-secondary" id="listen" data-bs-toggle="tooltip" title="OUVIR">
-                            <i class="fas fa-headphones"></i>
-                        </button>
                         <button class="btn btn-light" id="share" data-bs-toggle="tooltip" title="COMPARTILHAR">
                             <i class="fas fa-share-alt"></i>
                         </button>
@@ -112,11 +112,12 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
     <div class="modal fade" id="shareModal" tabindex="-1">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body text-center">
+                <div class="modal-body position-relative text-center">
                     <h5 class="mb-4">Compartilhar</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
                     <div class="d-flex justify-content-center gap-3">
                         <button class="btn btn-lg btn-secondary btn-share" data-via="x">
-                            <i class="fab fa-x"></i>
+                            <i class="fab fa-x-twitter"></i>
                         </button>
                         <button class="btn btn-lg btn-primary btn-share" data-via="facebook">
                             <i class="fab fa-facebook"></i>
@@ -133,8 +134,9 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
     <div class="modal fade" id="tutorialModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body">
+                <div class="modal-body position-relative">
                     <h3 class="text-center mb-4">Bem-vindo ao Trackle!</h3>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
                     <ul class="fa-ul">
                         <li>
                             <span class="fa-li">
