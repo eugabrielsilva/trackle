@@ -82,7 +82,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <h1 class="mb-4" id="modal-title"></h3>
+                    <h1 class="mb-4" id="modal-title"></h1>
                     <img src="" id="result-img" class="w-100 img-cover mb-4">
                     <h4 id="result-name"></h4>
                     <h5 class="mb-4" id="result-artist"></h5>
@@ -102,6 +102,27 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                         </button>
                         <button class="btn btn-light" id="share" data-bs-toggle="tooltip" title="COMPARTILHAR">
                             <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="shareModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h5 class="mb-4">Compartilhar</h5>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button class="btn btn-lg btn-secondary btn-share" data-via="x">
+                            <i class="fab fa-x"></i>
+                        </button>
+                        <button class="btn btn-lg btn-primary btn-share" data-via="facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button class="btn btn-lg btn-success btn-share" data-via="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
                         </button>
                     </div>
                 </div>

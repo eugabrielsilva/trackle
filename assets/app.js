@@ -11,6 +11,7 @@ $(function() {
     const $btnHelp = $('#help');
     const $inputSearch = $('#input');
     const $txtCountdown = $('#countdown');
+    const $btnsShare = $('.btn-share');
 
     const playlistId = $('body').attr('data-playlist-id');
     const isDaily = playlistId === 'daily';
@@ -335,6 +336,40 @@ $(function() {
         localStorage.setItem('tutorial', true);
     }
 
+    /**
+     * Função de compartilhamento.
+     * @param {*} via 
+     */
+    function share(via) {
+        const isCorrect = guesses.some(guess => guess.correct);
+        const time = guesses.length === 1 ? 'segundo' : 'segundos';
+
+        let text;
+        let url;
+
+        if(isDaily) {
+            text = isCorrect ? `Acertei a música de hoje em ${guesses.length} ${time}! Será que você consegue em menos tempo?` : `Não acertei a música de hoje! Será que você consegue?`;
+        } else {
+            text = isCorrect ? `Acertei a música "${answer.name} - ${answer.artist}" em ${guesses.length} ${time}!` : `Não acertei a música "${answer.name} - ${answer.artist}". Será que você consegue?`;
+        }
+
+        if(via === 'x') {
+            url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+        } else if(via === 'facebook') {
+            url = `https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(text)}`;
+        } else if(via === 'whatsapp') {
+            url = `https://wa.me/?text=${encodeURIComponent(`${text} ${window.location.href}`)}`;
+        }
+
+        window.open(url, '_blank');
+    }
+
+    $(document).on('show.bs.modal', '.modal', function() {
+        const zIndex = 1040 + 10 * $('.modal:visible').length;
+        $(this).css('z-index', zIndex);
+        setTimeout(() => $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack'));
+    });
+
     $inputSearch.on('input', updateOptions);
 
     $btnSubmit.on('click', makeGuess);
@@ -364,27 +399,12 @@ $(function() {
     });
 
     $btnShare.on('click', function() {
-        const isCorrect = guesses.some(guess => guess.correct);
+        $('#shareModal').modal('show');
+    });
 
-        let text;
-
-        if(isDaily) {
-            text = isCorrect ? `Acertei a música de hoje em ${guesses.length} segundos! Será que você consegue em menos tempo?` : `Não acertei a música de hoje! Será que você consegue?`;
-        } else {
-            text = isCorrect ? `Acertei a música "${answer.name} - ${answer.artist}" em ${guesses.length} segundos!` : `Não acertei a música "${answer.name} - ${answer.artist}". Será que você consegue?`;
-        }
-
-        const shareData = {
-            title: `Trackle - ${new Date().toLocaleDateString()}`,
-            text,
-            url: window.location.href
-        }
-
-        if(navigator.share) {
-            navigator.share(shareData);
-        } else {
-            alert('Compartilhamento não suportado neste navegador!');
-        }
+    $btnsShare.on('click', function() {
+        const via = $(this).attr('data-via');
+        share(via);
     });
 
     $btnHelp.on('click', function() {
