@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    min-height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.guesses {
+    display: flex;
+    flex-flow: column;
+    gap: 0.625rem;
+}
+
+.guess {
+    border: 1px solid dimgray;
+    height: 2.8125rem;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: var(--bs-border-radius);
+    font-size: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+.fa-ul {
+    font-size: 1.0625rem;
+}
+
+.img-cover {
+    margin-inline: auto;
+    display: block;
+    max-width: 300px;
+}
+
+.btn-play {
+    font-size: 2rem;
+    padding: 0;
+    margin: 1.25rem 0;
+    outline: none;
+    border: none;
+}
+
+.btn-play:focus,
+.btn-play:active {
+    outline: none;
+    border: none;
+}
+
+.options-box {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    z-index: 5;
+    padding: 10px;
+}
+
+.controls .form-control,
+.controls .btn {
+    font-size: 16px;
+}
+
+.options-box .option {
+    cursor: pointer;
+    padding: 5px;
+    font-size: 0.9375rem;
+}
+
+.btn-help {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.25rem;
+}

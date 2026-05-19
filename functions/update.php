@@ -1,0 +1,54 @@
+<?php
+
+require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/curl.php';
+
+$url_playlist = 'https://api.deezer.com/playlist/';
+
+$db = db_connect();
+
+$playlists = db_query($db, 'SELECT * FROM playlists');
+
+foreach ($playlists as $playlist) {
+    echo 'Atualizando playlist: ' . $playlist['name'] . PHP_EOL;
+
+    // Obter playlist
+    $data = curl_get($url_playlist . $playlist['deezer_id']);
+
+    // Atualiza a playlist
+    db_query($db, 'UPDATE playlists SET name = :name, picture_url = :picture_url WHERE id = :id', [
+        ':id' => $playlist['id'],
+        ':name' => $data['title'],
+        ':picture_url' => $data['picture_big'],
+    ]);
+
+    // Atualiza as músicas da playlist
+    foreach ($data['tracks']['data'] as $track) {
+        if (empty($track['preview'])) {
+            continue;
+        }
+
+        $song = db_query($db, 'SELECT * FROM songs WHERE deezer_id = :deezer_id AND playlist_id = :playlist_id', [
+            ':deezer_id' => $track['id'],
+            ':playlist_id' => $playlist['id'],
+        ]);
+
+        // Atualiza ou cria a música
+        if (!empty($song[0])) {
+            db_query($db, 'UPDATE songs SET name = :name, artist = :artist, picture_url = :picture_url WHERE id = :id', [
+                ':id' => $song[0]['id'],
+                ':name' => $track['title'],
+                ':artist' => $track['artist']['name'],
+                ':picture_url' => $track['album']['cover_big'],
+            ]);
+        } else {
+            db_query($db, 'INSERT INTO songs (name, artist, playlist_id, deezer_id, picture_url) VALUES (:name, :artist, :playlist_id, :deezer_id, :picture_url)', [
+                ':name' => $track['title'],
+                ':artist' => $track['artist']['name'],
+                ':playlist_id' => $playlist['id'],
+                ':deezer_id' => $track['id'],
+                ':picture_url' => $track['album']['cover_big'],
+            ]);
+        }
+    }
+}
