@@ -18,11 +18,9 @@ if (!empty($playlist_id) && is_numeric($playlist_id)) {
 }
 
 if (!empty($song)) {
-    if (empty($_GET['no_audio'])) {
-        $url_track = 'https://api.deezer.com/track/' . $song['deezer_id'];
-        $track_data = curl_get($url_track);
-        $song['preview_url'] = $track_data['preview'];
-    }
+    $url_track = 'https://api.deezer.com/track/' . $song['deezer_id'];
+    $track_data = curl_get($url_track);
+    $song['preview_url'] = $track_data['preview'];
 
     header('Content-Type: application/json');
     echo json_encode($song, JSON_NUMERIC_CHECK);

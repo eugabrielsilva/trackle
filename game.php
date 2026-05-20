@@ -29,7 +29,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trackle</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
@@ -95,7 +95,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                             </button>
                         <?php else : ?>
                             <button class="btn btn-lg" disabled>
-                                Próximo em <span id="countdown"></span>
+                                Próximo em <span id="countdown">00:00:00</span>
                             </button>
                         <?php endif; ?>
                         <button class="btn btn-light" id="share" data-bs-toggle="tooltip" title="COMPARTILHAR">

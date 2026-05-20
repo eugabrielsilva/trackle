@@ -63,7 +63,8 @@ h2 {
     width: 100%;
     text-align: left;
     z-index: 5;
-    padding: 10px;
+    border-radius: var(--bs-border-radius);
+    overflow: hidden;
 }
 
 .controls .form-control,
@@ -73,8 +74,12 @@ h2 {
 
 .options-box .option {
     cursor: pointer;
-    padding: 5px;
+    padding: 10px 15px;
     font-size: 0.9375rem;
+}
+
+.options-box .option:hover {
+    background-color: #5a6268;
 }
 
 .btn-help {

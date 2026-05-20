@@ -132,22 +132,25 @@ $(function() {
      * Carregar música e opções de resposta.
      */
     function loadMusic() {
-        $.getJSON(`music?playlist_id=${playlistId}&no_audio=${dailyInfo?.win || dailyInfo?.loss ? 1 : 0}`, musicResponse => {
-            answer = musicResponse;
-            audio = new Audio(answer.preview_url);
+        if(!dailyInfo?.win && !dailyInfo?.loss) {
+            $.getJSON(`music?playlist_id=${playlistId}`, musicResponse => {
+                answer = musicResponse;
+                audio = new Audio(answer.preview_url);
 
-            $btnPlay.prop('disabled', false).html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
+                $btnPlay.prop('disabled', false).html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
 
-            $.getJSON(`list?playlist_id=${playlistId}`, listResponse => {
-                options = listResponse;
+                $.getJSON(`list?playlist_id=${playlistId}`, listResponse => {
+                    options = listResponse;
+                }).fail(error => {
+                    alert('Erro ao carregar a lista de músicas. Por favor, tente novamente mais tarde.');
+                    console.error(error);
+                });
+
             }).fail(error => {
-                alert('Erro ao carregar a lista de músicas. Por favor, tente novamente mais tarde.');
+                alert('Erro ao carregar a música. Por favor, tente novamente mais tarde.');
                 console.error(error);
             });
-        }).fail(error => {
-            alert('Erro ao carregar a música. Por favor, tente novamente mais tarde.');
-            console.error(error);
-        });
+        }
     }
 
     /**
@@ -187,14 +190,16 @@ $(function() {
      * @param {*} createTimeout 
      */
     function playAudio(createTimeout = true) {
-        isPlaying = true;
+        if(audio) {
+            isPlaying = true;
 
-        audio.currentTime = 0;
-        audio.play();
+            audio.currentTime = 0;
+            audio.play();
 
-        if(createTimeout) {
-            $btnPlay.html('<i class="far fa-stop-circle me-2"></i>Parar');
-            audioTimeout = setTimeout(stopAudio, currentGuess * 1000);
+            if(createTimeout) {
+                $btnPlay.html('<i class="far fa-stop-circle me-2"></i>Parar');
+                audioTimeout = setTimeout(stopAudio, currentGuess * 1000);
+            }
         }
     }
 
@@ -202,13 +207,15 @@ $(function() {
      * Parar áudio.
      */
     function stopAudio() {
-        isPlaying = false;
-        audio.pause();
+        if(audio) {
+            isPlaying = false;
+            audio.pause();
 
-        $btnPlay.html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
+            $btnPlay.html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
 
-        if(audioTimeout) clearTimeout(audioTimeout);
-        audioTimeout = null;
+            if(audioTimeout) clearTimeout(audioTimeout);
+            audioTimeout = null;
+        }
     }
 
     /**
