@@ -27,8 +27,6 @@ $(function() {
     let dailyInfo = null;
     let streak = {};
 
-    $('[data-bs-toggle="tooltip"]').tooltip();
-
     /**
      * Inicializar jogo.
      */
@@ -321,6 +319,7 @@ $(function() {
         clearOptions();
         nextGuess();
         updateGuesses();
+        animateLastGuess();
     }
 
     /**
@@ -342,6 +341,22 @@ $(function() {
             if(!isPlaying) {
                 $btnPlay.html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
             }
+        }
+    }
+
+    /**
+     * Animar o último palpite em caso de erro ou pulo.
+     */
+    function animateLastGuess() {
+        const index = guesses.length - 1;
+
+        if(!guesses[index].correct) {
+            const $lastGuess = $guessesContainer.children().eq(index);
+            $lastGuess.addClass('shake');
+
+            setTimeout(() => {
+                $lastGuess.removeClass('shake');
+            }, 1000);
         }
     }
 

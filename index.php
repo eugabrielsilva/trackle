@@ -4,6 +4,8 @@ require_once __DIR__ . '/functions/database.php';
 $db = db_connect();
 $playlists = db_query($db, 'SELECT * FROM playlists ORDER BY RANDOM()');
 
+$song_count = db_query($db, 'SELECT COUNT(DISTINCT deezer_id) AS count FROM songs')[0]['count'];
+
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +25,11 @@ $playlists = db_query($db, 'SELECT * FROM playlists ORDER BY RANDOM()');
 <body class="bg-dark text-white">
     <div class="container text-center">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-8 position-relative">
                 <h1 class="mb-2">Trackle</h1>
+                <a href="https://github.com/eugabrielsilva/trackle" target="_blank" class="btn btn-help" id="help" data-bs-toggle="tooltip" title="GITHUB">
+                    <i class="fab fa-github"></i>
+                </a>
                 <h2 class="mb-4">Escolha sua playlist favorita:</h2>
                 <div class="row g-3">
                     <div class="col-6 col-sm-4 col-md-3">
@@ -40,6 +45,7 @@ $playlists = db_query($db, 'SELECT * FROM playlists ORDER BY RANDOM()');
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <h5 class="mt-4"><?= $song_count ?> músicas disponíveis e subindo!</h5>
                 <small class="d-block mt-4 text-secondary">
                     Este jogo é gratuito e utiliza dados fornecidos pela API do Deezer. <br> Todos os direitos sobre as obras pertencem aos seus respectivos artistas e gravadoras.
                 </small>

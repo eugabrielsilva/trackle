@@ -7,5 +7,7 @@ $(function() {
     window.onresize = resize;
 
     resize();
+    
+    $('[data-bs-toggle="tooltip"]').tooltip();
 
 });
