@@ -44,12 +44,23 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
         <div class="row justify-content-center">
             <div class="col-lg-6 position-relative">
                 <h1 class="mb-2">Trackle</h1>
-                <button class="btn btn-help" id="help" data-bs-toggle="tooltip" title="AJUDA">
+                <button class="btn btn-help" id="help" data-tooltip title="AJUDA">
                     <i class="fas fa-question-circle"></i>
                 </button>
+                <div class="dropdown volume">
+                    <button class="btn btn-volume" data-tooltip data-bs-toggle="dropdown" title="VOLUME">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item d-flex gap-2">
+                            <input type="range" class="form-range" min="0" max="100" id="volume" value="100">
+                            <div id="volume-value">100%</div>
+                        </div>
+                    </div>
+                </div>
                 <h2 class="mb-4">
                     <?= $playlist['name']; ?>
-                    <a href="./" class="text-white ms-1" data-bs-toggle="tooltip" title="TROCAR PLAYLIST">
+                    <a href="./" class="text-white ms-1" data-tooltip title="TROCAR PLAYLIST">
                         <i class="fas fa-arrow-right-arrow-left"></i>
                     </a>
                 </h2>
@@ -62,10 +73,10 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                         <div class="options-box d-none bg-secondary" id="options"></div>
                         <input type="text" class="form-control" placeholder="Pesquise por nome ou artista" id="input">
                     </div>
-                    <button class="btn btn-success text-nowrap" id="submit" disabled data-bs-toggle="tooltip" title="PALPITE">
+                    <button class="btn btn-success text-nowrap" id="submit" disabled data-tooltip title="PALPITE">
                         <i class="fas fa-paper-plane"></i>
                     </button>
-                    <button class="btn btn-secondary text-nowrap" id="skip" data-bs-toggle="tooltip" title="PULAR">
+                    <button class="btn btn-secondary text-nowrap" id="skip" data-tooltip title="PULAR">
                         <i class="fas fa-forward"></i>
                     </button>
                 </div>
@@ -98,10 +109,10 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                                 Próximo em <span id="countdown">00:00:00</span>
                             </button>
                         <?php endif; ?>
-                        <a href="./" class="btn btn-secondary" data-bs-toggle="tooltip" title="TROCAR PLAYLIST">
+                        <a href="./" class="btn btn-secondary" data-tooltip title="TROCAR PLAYLIST">
                             <i class="fas fa-arrow-right-arrow-left align-middle"></i>
                         </a>
-                        <button class="btn btn-light" id="share" data-bs-toggle="tooltip" title="COMPARTILHAR">
+                        <button class="btn btn-light" id="share" data-tooltip title="COMPARTILHAR">
                             <i class="fas fa-share-alt"></i>
                         </button>
                     </div>

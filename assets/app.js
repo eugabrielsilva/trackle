@@ -12,6 +12,8 @@ $(function() {
     const $txtCountdown = $('#countdown');
     const $txtStreak = $('#streak');
     const $btnsShare = $('.btn-share');
+    const $volume = $('#volume');
+    const $volumeValue = $('#volume-value');
 
     const playlistId = $('body').attr('data-playlist-id');
     const isDaily = playlistId === 'daily';
@@ -26,16 +28,31 @@ $(function() {
     let selectedOption = null;
     let dailyInfo = null;
     let streak = {};
+    let volume = 1;
 
     /**
      * Inicializar jogo.
      */
     function init() {
         loadDailyInfo();
+        loadVolume();
         updateGuesses();
         loadMusic();
         showTutorial();
         loadStreak();
+    }
+
+    /**
+     * Carregar volume.
+     */
+    function loadVolume() {
+        const data = localStorage.getItem('volume');
+
+        if(data) {
+            volume = parseFloat(data);
+            $volume.val(volume * 100);
+            $volumeValue.text(`${$volume.val()}%`);
+        }
     }
 
     /**
@@ -134,6 +151,7 @@ $(function() {
             $.getJSON(`music?playlist_id=${playlistId}`, musicResponse => {
                 answer = musicResponse;
                 audio = new Audio(answer.preview_url);
+                audio.volume = volume;
 
                 $btnPlay.prop('disabled', false).html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
 
@@ -467,6 +485,17 @@ $(function() {
 
     $btnHelp.on('click', function() {
         showTutorial(true);
+    });
+
+    $volume.on('input', function() {
+        volume = parseFloat($(this).val() / 100);
+        $volumeValue.text(`${$(this).val()}%`);
+
+        if(audio) {
+            audio.volume = volume;
+        }
+
+        localStorage.setItem('volume', volume);
     });
 
     init();

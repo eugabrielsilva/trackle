@@ -89,6 +89,16 @@ h2 {
     font-size: 1.25rem;
 }
 
+.volume {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.volume .btn {
+    font-size: 1.25rem;
+}
+
 .modal-sm {
     max-width: 300px;
     margin: auto;

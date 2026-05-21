@@ -31,7 +31,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
         <div class="row justify-content-center">
             <div class="col-lg-8 position-relative">
                 <h1 class="mb-2">Trackle</h1>
-                <a href="https://github.com/eugabrielsilva/trackle" target="_blank" class="btn btn-help" id="help" data-bs-toggle="tooltip" title="GITHUB">
+                <a href="https://github.com/eugabrielsilva/trackle" target="_blank" class="btn btn-help" id="help" data-tooltip title="GITHUB">
                     <i class="fab fa-github"></i>
                 </a>
                 <h2 class="mb-4">Escolha sua playlist favorita:</h2>

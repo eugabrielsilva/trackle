@@ -8,6 +8,6 @@ $(function() {
 
     resize();
     
-    $('[data-bs-toggle="tooltip"]').tooltip();
+    $('[data-tooltip]').tooltip();
 
 });
