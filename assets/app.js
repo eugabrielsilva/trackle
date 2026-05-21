@@ -291,7 +291,7 @@ $(function() {
 
         guesses.push({
             text,
-            correct: selectedOption.id === answer.id,
+            correct: selectedOption.deezer_id === answer.deezer_id,
             skipped: false
         });
 
