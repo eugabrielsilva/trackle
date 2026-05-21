@@ -6,6 +6,9 @@ $playlists = db_query($db, 'SELECT * FROM playlists ORDER BY RANDOM()');
 
 $song_count = db_query($db, 'SELECT COUNT(DISTINCT deezer_id) AS count FROM songs')[0]['count'];
 
+$folder = trim(mb_substr($_SERVER['PHP_SELF'], 0, mb_strpos($_SERVER['PHP_SELF'], '/index.php')), '/');
+$baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/' . $folder . (!empty($folder) ? '/' : '');
+
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +21,9 @@ $song_count = db_query($db, 'SELECT COUNT(DISTINCT deezer_id) AS count FROM song
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/app.css">
-    <link rel="shortcut icon" href="assets/icon.png">
+    <link rel="stylesheet" href="<?= $baseUrl; ?>assets/app.css?version=<?= md5(filemtime(__DIR__ . '/assets/app.css')); ?>">
+    <base href="<?= $baseUrl; ?>">
+    <link rel="shortcut icon" href="<?= $baseUrl; ?>assets/icon.png">
 </head>
 
 <body class="bg-dark text-white">
@@ -55,7 +59,7 @@ $song_count = db_query($db, 'SELECT COUNT(DISTINCT deezer_id) AS count FROM song
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/responsive.js"></script>
+    <script src="<?= $baseUrl; ?>assets/responsive.js?version=<?= md5(filemtime(__DIR__ . '/assets/responsive.js')); ?>"></script>
 </body>
 
 </html>

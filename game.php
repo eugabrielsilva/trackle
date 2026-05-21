@@ -9,7 +9,7 @@ if (!empty($_GET['playlist_id'])) {
     ])[0] ?? null;
 
     if (empty($playlist)) {
-        header('Location: index.php');
+        header('Location: ./');
         exit;
     }
 } else {
@@ -49,7 +49,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                 </button>
                 <h2 class="mb-4">
                     <?= $playlist['name']; ?>
-                    <a href="index.php" class="text-white ms-1" data-bs-toggle="tooltip" title="TROCAR PLAYLIST">
+                    <a href="./" class="text-white ms-1" data-bs-toggle="tooltip" title="TROCAR PLAYLIST">
                         <i class="fas fa-arrow-right-arrow-left"></i>
                     </a>
                 </h2>
@@ -98,6 +98,9 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                                 Próximo em <span id="countdown">00:00:00</span>
                             </button>
                         <?php endif; ?>
+                        <a href="./" class="btn btn-secondary" data-bs-toggle="tooltip" title="TROCAR PLAYLIST">
+                            <i class="fas fa-arrow-right-arrow-left align-middle"></i>
+                        </a>
                         <button class="btn btn-light" id="share" data-bs-toggle="tooltip" title="COMPARTILHAR">
                             <i class="fas fa-share-alt"></i>
                         </button>
