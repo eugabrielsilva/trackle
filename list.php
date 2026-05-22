@@ -10,12 +10,9 @@ if (!empty($playlist_id) && is_numeric($playlist_id)) {
     $songs = db_query($db, 'SELECT deezer_id, name, artist FROM songs WHERE playlist_id = :playlist_id ORDER BY name ASC', [
         ':playlist_id' => $playlist_id
     ]);
-
-    header('Content-Type: application/json');
-    echo json_encode($songs, JSON_NUMERIC_CHECK);
 } else {
     $songs = db_query($db, 'SELECT MIN(deezer_id) AS deezer_id, MIN(name) AS name, MIN(artist) AS artist FROM songs GROUP BY deezer_id ORDER BY name ASC');
-
-    header('Content-Type: application/json');
-    echo json_encode($songs, JSON_NUMERIC_CHECK);
 }
+
+header('Content-Type: application/octet-stream');
+echo base64_encode(json_encode($songs, JSON_NUMERIC_CHECK));

@@ -148,15 +148,15 @@ $(function() {
      */
     function loadMusic() {
         if(!dailyInfo?.win && !dailyInfo?.loss) {
-            $.getJSON(`music?playlist_id=${playlistId}`, musicResponse => {
-                answer = musicResponse;
+            $.get(`music?playlist_id=${playlistId}`, musicResponse => {
+                answer = JSON.parse(atob(musicResponse));
                 audio = new Audio(answer.preview_url);
                 audio.volume = volume;
 
                 $btnPlay.prop('disabled', false).html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
 
-                $.getJSON(`list?playlist_id=${playlistId}`, listResponse => {
-                    options = listResponse;
+                $.get(`list?playlist_id=${playlistId}`, listResponse => {
+                    options = JSON.parse(atob(listResponse));
                 }).fail(error => {
                     alert('Erro ao carregar a lista de músicas. Por favor, tente novamente mais tarde.');
                     console.error(error);

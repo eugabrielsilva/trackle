@@ -22,6 +22,6 @@ if (!empty($song)) {
     $track_data = curl_get($url_track);
     $song['preview_url'] = $track_data['preview'];
 
-    header('Content-Type: application/json');
-    echo json_encode($song, JSON_NUMERIC_CHECK);
+    header('Content-Type: application/octet-stream');
+    echo base64_encode(json_encode($song, JSON_NUMERIC_CHECK));
 }
