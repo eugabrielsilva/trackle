@@ -49,7 +49,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <h5 class="mt-4"><?= $song_count ?> músicas disponíveis e subindo!</h5>
+                <h5 class="mt-4"><?= number_format($song_count, 0, '', '.') ?> músicas disponíveis e subindo!</h5>
                 <small class="d-block mt-4 text-secondary">
                     Este jogo é gratuito e utiliza dados fornecidos pela API do Deezer. <br> Todos os direitos sobre as obras pertencem aos seus respectivos artistas e gravadoras.
                 </small>
