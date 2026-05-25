@@ -442,7 +442,8 @@ $(function() {
         } else if(via === 'whatsapp') {
             url = `https://wa.me/?text=${encodeURIComponent(`${text} ${window.location.href}`)}`;
         }
-
+        
+        stopAudio();
         window.open(url, '_blank');
     }
 
