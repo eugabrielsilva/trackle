@@ -34,12 +34,14 @@ $(function() {
      * Inicializar jogo.
      */
     function init() {
+        resize();
         loadDailyInfo();
         loadVolume();
         updateGuesses();
         loadMusic();
         showTutorial();
         loadStreak();
+        $('[data-tooltip]').tooltip();
     }
 
     /**
@@ -449,6 +451,15 @@ $(function() {
         $(this).css('z-index', zIndex);
         setTimeout(() => $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack'));
     });
+
+    /**
+     * Redimensionar tela.
+     */
+    function resize() {
+        $('html').css('font-size', ((window.innerHeight / 960) * 16 * 1.1) + 'px');
+    }
+
+    window.onresize = resize;
 
     $inputSearch.on('input', updateOptions);
 

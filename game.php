@@ -81,7 +81,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                     </button>
                 </div>
                 <small class="d-block mt-4 text-secondary">
-                    Este jogo é gratuito e utiliza dados fornecidos pela API do Deezer. Todos os direitos sobre as obras pertencem aos seus respectivos artistas e gravadoras.
+                    Este jogo é gratuito e utiliza dados fornecidos pela API do Deezer. Todos os direitos sobre as obras pertencem aos seus respectivos artistas e gravadoras. Desenvolvido por <a class="text-secondary" href="https://gabrielsilva.dev.br" target="_blank">Gabriel Silva</a>
                 </small>
             </div>
         </div>
@@ -143,70 +143,11 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
         </div>
     </div>
 
-    <div class="modal fade" id="tutorialModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body position-relative">
-                    <h3 class="text-center mb-4">Bem-vindo ao Trackle!</h3>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
-                    <ul class="fa-ul">
-                        <li>
-                            <span class="fa-li">
-                                <i class="fas fa-music"></i>
-                            </span>
-                            O objetivo do jogo é acertar a música no <strong>menor tempo</strong> possível.
-                        </li>
-                        <li>
-                            <span class="fa-li">
-                                <i class="fas fa-hourglass"></i>
-                            </span>
-                            Você tem <strong>10 tentativas</strong> para acertar qual é a música.
-                        </li>
-                        <li>
-                            <span class="fa-li">
-                                <i class="far fa-play-circle"></i>
-                            </span>
-                            Clique no botão <strong>OUVIR</strong> para ouvir um trecho da música.
-                        </li>
-                        <li>
-                            <span class="fa-li">
-                                <i class="fas fa-paper-plane"></i>
-                            </span>
-                            Digite seu palpite no campo de busca e clique em <strong>PALPITE</strong>.
-                        </li>
-                        <li>
-                            <span class="fa-li">
-                                <i class="fas fa-forward"></i>
-                            </span>
-                            Se não souber, clique em <strong>PULAR</strong> para ir para a próxima tentativa.
-                        </li>
-                        <li>
-                            <span class="fa-li">
-                                <i class="fas fa-plus-circle"></i>
-                            </span>
-                            A cada tentativa, você pode ouvir <strong>+1 segundo</strong> da música.
-                        </li>
-                        <li>
-                            <span class="fa-li">
-                                <i class="fas fa-arrow-right-arrow-left"></i>
-                            </span>
-                            Você pode tentar outras playlists clicando no botão <strong>TROCAR</strong>.
-                        </li>
-                    </ul>
-                    <div class="text-center mt-3">
-                        <button class="btn btn-lg btn-primary" data-bs-dismiss="modal">
-                            Jogar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include_once __DIR__ . '/functions/tutorial.php'; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
     <script src="<?= $baseUrl; ?>assets/app.js?version=<?= md5(filemtime(__DIR__ . '/assets/app.js')); ?>"></script>
-    <script src="<?= $baseUrl; ?>assets/responsive.js?version=<?= md5(filemtime(__DIR__ . '/assets/responsive.js')); ?>"></script>
 </body>
 
 </html>

@@ -141,3 +141,39 @@ h2 {
     animation-name: headShake;
     animation-duration: 1s;
 }
+
+.btn-favorite {
+    appearance: none;
+    border: none;
+    outline: none;
+    color: dimgray;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    opacity: 0;
+    z-index: 1;
+    background: #fafafa;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s all;
+    font-size: 1.1rem;
+}
+
+.base-item:hover .btn-favorite {
+    opacity: 0.8;
+}
+
+.btn-favorite:hover {
+    opacity: 1;
+    background: #e5e5e5;
+    color: black;
+}
+
+.btn-favorite.active i {
+    font-weight: 700 !important;
+    color: #f43f5e;
+}
