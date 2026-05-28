@@ -12,7 +12,13 @@ if (!empty($playlist_id) && is_numeric($playlist_id)) {
         ':playlist_id' => $playlist_id
     ])[0];
 } else if ($playlist_id === 'daily') {
-    $song = db_query($db, 'SELECT * FROM songs ORDER BY md5(:hoje || id) LIMIT 1', [
+    $song = db_query($db, 'SELECT songs.* 
+    FROM songs 
+    JOIN playlists 
+    ON songs.playlist_id = playlists.id 
+    WHERE playlists.daily = 1 
+    ORDER BY md5(:hoje || songs.id) 
+    LIMIT 1', [
         ':hoje' => date('Y-m-d')
     ])[0];
 }
