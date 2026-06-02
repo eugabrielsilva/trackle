@@ -10,7 +10,7 @@ $playlist_id = $_GET['playlist_id'] ?? null;
 if (!empty($playlist_id) && is_numeric($playlist_id)) {
     $song = db_query($db, 'SELECT * FROM songs WHERE playlist_id = :playlist_id ORDER BY RANDOM() LIMIT 1', [
         ':playlist_id' => $playlist_id
-    ])[0];
+    ])[0] ?? null;
 } else if ($playlist_id === 'daily') {
     $song = db_query($db, 'SELECT songs.* 
     FROM songs 
@@ -20,7 +20,7 @@ if (!empty($playlist_id) && is_numeric($playlist_id)) {
     ORDER BY md5(:hoje || songs.id) 
     LIMIT 1', [
         ':hoje' => date('Y-m-d')
-    ])[0];
+    ])[0] ?? null;
 }
 
 if (!empty($song)) {
@@ -30,4 +30,7 @@ if (!empty($song)) {
 
     header('Content-Type: application/octet-stream');
     echo base64_encode(json_encode($song, JSON_NUMERIC_CHECK));
+    exit;
 }
+
+http_response_code(404);

@@ -22,5 +22,10 @@ if (!empty($playlist_id) && is_numeric($playlist_id)) {
     ORDER BY songs.name ASC');
 }
 
-header('Content-Type: application/octet-stream');
-echo base64_encode(json_encode($songs, JSON_NUMERIC_CHECK));
+if (!empty($songs)) {
+    header('Content-Type: application/octet-stream');
+    echo base64_encode(json_encode($songs, JSON_NUMERIC_CHECK));
+    exit;
+}
+
+http_response_code(404);

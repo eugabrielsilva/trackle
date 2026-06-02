@@ -11,19 +11,9 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="pt-br" data-bs-theme="dark">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Trackle</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="<?= $baseUrl; ?>assets/app.css?version=<?= md5(filemtime(__DIR__ . '/assets/app.css')); ?>">
-    <base href="<?= $baseUrl; ?>">
-    <link rel="shortcut icon" href="<?= $baseUrl; ?>assets/icon.png">
-</head>
+<?php include_once __DIR__ . '/functions/headers.php'; ?>
 
 <body class="bg-dark text-white d-block">
     <div class="container text-center">
