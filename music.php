@@ -7,7 +7,11 @@ $db = db_connect();
 
 $playlist_id = $_GET['playlist_id'] ?? null;
 
-if (!empty($playlist_id) && is_numeric($playlist_id)) {
+$meme_mode = false;
+
+if ($meme_mode) {
+    $song = db_query($db, 'SELECT * FROM songs WHERE id = 1949')[0] ?? null;
+} else if (!empty($playlist_id) && is_numeric($playlist_id)) {
     $song = db_query($db, 'SELECT * FROM songs WHERE playlist_id = :playlist_id ORDER BY RANDOM() LIMIT 1', [
         ':playlist_id' => $playlist_id
     ])[0] ?? null;

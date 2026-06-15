@@ -4,9 +4,13 @@ require_once __DIR__ . '/functions/database.php';
 
 $playlist_id = $_GET['playlist_id'] ?? null;
 
+$meme_mode = false;
+
 $db = db_connect();
 
-if (!empty($playlist_id) && is_numeric($playlist_id)) {
+if ($meme_mode) {
+    $songs = db_query($db, 'SELECT deezer_id, name, artist FROM songs WHERE id = 1949');
+} else if (!empty($playlist_id) && is_numeric($playlist_id)) {
     $songs = db_query($db, 'SELECT deezer_id, name, artist FROM songs WHERE playlist_id = :playlist_id ORDER BY name ASC', [
         ':playlist_id' => $playlist_id
     ]);
