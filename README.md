@@ -19,6 +19,18 @@ Jogue online em [https://gabrielsilva.dev.br/trackle](https://gabrielsilva.dev.b
 
 ## Instalação
 
+### Instalação com Docker (recomendado)
+
+Para rodar com Docker no seu próprio servidor, inicie o container usando o comando:
+
+```bash
+docker compose up -d --build
+```
+
+O servidor estará pronto e rodando na porta `8080`.
+
+### Instalação manual
+
 Para rodar no seu próprio servidor, é necessário possuir o Apache com `mod_rewrite` habilitado e PHP na versão 8.0 com a extensão `pdo_sqlite` habilitada.
 
 Basta clonar o repositório para dentro da pasta `www` ou `public_html` (dependendo da sua instalação do Apache) e acessar a URL ou IP do servidor no browser.
