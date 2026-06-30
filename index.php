@@ -28,25 +28,26 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
-                <h2 class="mb-4">Escolha sua playlist favorita:</h2>
-                <div class="d-flex gap-3 mb-4">
-                    <input type="text" class="form-control" id="search" placeholder="Pesquise uma playlist">
-                    <button class="btn btn-outline-secondary" id="btnFavorites" data-tooltip title="FAVORITAS">
-                        <i class="fas fa-heart"></i>
+                <h2 class="fw-light mb-4">Escolha sua playlist favorita:</h2>
+                <div class="d-flex align-items-stretch gap-3 mb-4">
+                    <input type="text" class="form-control h-auto rounded-3" id="search" placeholder="Pesquise uma playlist">
+                    <button class="btn btn-lg btn-outline-secondary rounded-3 text-nowrap" id="btnFavorites">
+                        <i class="fas fa-heart me-1"></i>
+                        Favoritas
                     </button>
                 </div>
                 <div class="row g-3" id="playlists">
-                    <div class=" col-6 col-sm-4 col-md-3 base-item d-none">
+                    <div class="col-6 col-sm-4 col-md-3 base-item d-none">
                         <div class="position-relative">
                             <button class="btn-favorite"><i class="far fa-heart"></i></button>
                             <a href="" class="d-block">
-                                <img src="" class="w-100 border border-secondary">
+                                <img src="" class="w-100 border rounded-4 border-secondary">
                             </a>
                         </div>
                     </div>
                 </div>
-                <h5 class="mt-4"><?= number_format($song_count, 0, '', '.') ?> músicas disponíveis e subindo!</h5>
-                <small class="d-block mt-4 text-secondary">
+                <h5 class="mt-5"><?= number_format($song_count, 0, '', '.') ?> músicas disponíveis e subindo!</h5>
+                <small class="d-block mt-4 text-muted">
                     Este jogo é gratuito e utiliza dados fornecidos pela API do Deezer. Todos os direitos sobre as obras pertencem aos seus respectivos artistas e gravadoras. Desenvolvido por <a class="text-secondary" href="https://gabrielsilva.dev.br" target="_blank">Gabriel Silva</a>
                 </small>
             </div>

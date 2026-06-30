@@ -41,14 +41,14 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                     <button class="btn btn-volume" data-tooltip data-bs-toggle="dropdown" title="VOLUME">
                         <i class="fas fa-volume-up"></i>
                     </button>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-item d-flex gap-2">
+                    <div class="dropdown-menu rounded-4 p-0">
+                        <div class="dropdown-item py-2 rounded-4 d-flex gap-2">
                             <input type="range" class="form-range" min="0" max="100" id="volume" value="100">
                             <div id="volume-value">100%</div>
                         </div>
                     </div>
                 </div>
-                <h2 class="mb-4">
+                <h2 class="fw-light mb-4">
                     <?= $playlist['name']; ?>
                     <a href="./" class="text-white ms-1" data-tooltip title="TROCAR PLAYLIST">
                         <i class="fas fa-arrow-right-arrow-left"></i>
@@ -58,19 +58,19 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                 <button class="btn btn-play" id="play" disabled tabindex="-1">
                     <i class="fas fa-spinner fa-spin"></i>
                 </button>
-                <div class="d-flex gap-3 align-items-center controls">
+                <div class="d-flex gap-3 align-items-stretch controls">
                     <div class="position-relative w-100">
-                        <div class="options-box d-none bg-secondary" id="options"></div>
-                        <input type="text" class="form-control" placeholder="Pesquise por nome ou artista" id="input">
+                        <div class="options-box d-none" id="options"></div>
+                        <input type="text" class="form-control h-100 rounded-3" placeholder="Pesquise por nome ou artista" id="input">
                     </div>
-                    <button class="btn btn-success text-nowrap" id="submit" disabled data-tooltip title="PALPITE">
+                    <button class="btn btn-lg btn-success text-nowrap" id="submit" disabled data-tooltip title="PALPITE">
                         <i class="fas fa-paper-plane"></i>
                     </button>
-                    <button class="btn btn-secondary text-nowrap" id="skip" data-tooltip title="PULAR">
+                    <button class="btn btn-lg btn-secondary text-nowrap" id="skip" data-tooltip title="PULAR">
                         <i class="fas fa-forward"></i>
                     </button>
                 </div>
-                <small class="d-block mt-4 text-secondary">
+                <small class="d-block mt-4 text-muted">
                     Este jogo é gratuito e utiliza dados fornecidos pela API do Deezer. Todos os direitos sobre as obras pertencem aos seus respectivos artistas e gravadoras. Desenvolvido por <a class="text-secondary" href="https://gabrielsilva.dev.br" target="_blank">Gabriel Silva</a>
                 </small>
             </div>
@@ -90,19 +90,19 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                     </a>
                     <div class="d-flex gap-3 justify-content-center">
                         <?php if ($playlist['id'] !== 'daily') : ?>
-                            <button class="btn btn-lg btn-primary" id="replay">
+                            <button class="btn btn-lg btn-info" id="replay">
                                 <i class="fas fa-sync me-1"></i>
                                 Jogar novamente
                             </button>
                         <?php else : ?>
-                            <button class="btn btn-lg" disabled>
+                            <button class="btn btn-outline-success btn-lg" disabled>
                                 Próximo em <span id="countdown">00:00:00</span>
                             </button>
                         <?php endif; ?>
-                        <a href="./" class="btn btn-secondary" data-tooltip title="TROCAR PLAYLIST">
+                        <a href="./" class="btn btn-lg btn-secondary" data-tooltip title="TROCAR PLAYLIST">
                             <i class="fas fa-arrow-right-arrow-left align-middle"></i>
                         </a>
-                        <button class="btn btn-light" id="share" data-tooltip title="COMPARTILHAR">
+                        <button class="btn btn-lg btn-light" id="share" data-tooltip title="COMPARTILHAR">
                             <i class="fas fa-share-alt"></i>
                         </button>
                     </div>
@@ -118,10 +118,10 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                     <h5 class="mb-4">Compartilhar</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                     <div class="d-flex justify-content-center gap-3">
-                        <button class="btn btn-lg btn-secondary btn-share" data-via="x">
+                        <button class="btn btn-lg btn-dark btn-share" data-via="x">
                             <i class="fab fa-x-twitter"></i>
                         </button>
-                        <button class="btn btn-lg btn-primary btn-share" data-via="facebook">
+                        <button class="btn btn-lg btn-info btn-share" data-via="facebook">
                             <i class="fab fa-facebook"></i>
                         </button>
                         <button class="btn btn-lg btn-success btn-share" data-via="whatsapp">

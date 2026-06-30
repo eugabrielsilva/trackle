@@ -4,7 +4,11 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+input::placeholder {
+    color: #f1f1f1 !important;
 }
 
 .guesses {
@@ -15,12 +19,13 @@ body {
 
 .guess {
     border: 1px solid dimgray;
-    height: 2.8125rem;
+    height: 2.95rem;
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    border-radius: var(--bs-border-radius);
+    padding: 5px 15px;
+    border-radius: var(--bs-border-radius-xl);
     font-size: 1rem;
+    flex-direction: row;
 }
 
 h1 {
@@ -63,23 +68,26 @@ h2 {
     width: 100%;
     text-align: left;
     z-index: 5;
-    border-radius: var(--bs-border-radius);
+    border-radius: var(--bs-border-radius-xl);
     overflow: hidden;
+    border: 1px solid var(--bs-primary);
+    background: transparent;
+    backdrop-filter: blur(5px);
 }
 
 .controls .form-control,
 .controls .btn {
-    font-size: 16px;
+    font-size: 1.0625rem;
 }
 
 .options-box .option {
     cursor: pointer;
-    padding: 10px 15px;
+    padding: 15px;
     font-size: 0.9375rem;
 }
 
 .options-box .option:hover {
-    background-color: #5a6268;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .btn-help {
@@ -176,4 +184,15 @@ h2 {
 .btn-favorite.active i {
     font-weight: 700 !important;
     color: #f43f5e;
+}
+
+.audio-playing {
+    background-image: url('audio.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 2.1875rem;
+    width: 2.1875rem;
+    background-position: center;
+    vertical-align: middle;
 }

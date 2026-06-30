@@ -74,6 +74,11 @@ $(function() {
             sortedPlaylists = sortedPlaylists.filter(playlist => favorites.includes(playlist.id));
         }
 
+        if(sortedPlaylists.length === 0) {
+            $playlists.append('<div class="text-center fs-5 py-5 text-muted">Nenhuma playlist encontrada.</div>');
+            return;
+        }
+
         sortedPlaylists.forEach(playlist => {
             const $item = $baseItem.clone();
 
@@ -114,10 +119,12 @@ $(function() {
      * Redimensionar tela.
      */
     function resize() {
-        $('html').css('font-size', ((window.innerHeight / 960) * 16 * 1.1) + 'px');
+        $('html').css('font-size', ((window.innerHeight / 980) * 16 * 1.1) + 'px');
     }
 
-    window.onresize = resize;
+    window.onresize = function() {
+        setTimeout(resize, 500);
+    };
 
     $btnHelp.on('click', function() {
         showTutorial(true);

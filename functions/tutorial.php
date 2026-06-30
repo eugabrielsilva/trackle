@@ -49,7 +49,7 @@
                     </li>
                 </ul>
                 <div class="text-center mt-3">
-                    <button class="btn btn-lg btn-primary" data-bs-dismiss="modal">
+                    <button class="btn btn-lg btn-secondary" data-bs-dismiss="modal">
                         Jogar
                     </button>
                 </div>

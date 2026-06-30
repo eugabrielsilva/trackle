@@ -179,7 +179,7 @@ $(function() {
 
         for(let i = 1; i <= 10; i++) {
             const guess = guesses[i - 1];
-            const $item = $(`<div class="guess"></div>`);
+            const $item = $(`<div class="guess card"></div>`);
 
             if(i === currentGuess && !dailyInfo?.win && !dailyInfo?.loss) {
                 $item.addClass('border-white');
@@ -215,7 +215,7 @@ $(function() {
             audio.play();
 
             if(createTimeout) {
-                $btnPlay.html('<i class="far fa-stop-circle me-2"></i>Parar');
+                $btnPlay.html('<span class="audio-playing me-3"></span>Parar');
                 audioTimeout = setTimeout(stopAudio, currentGuess * 1000);
             }
         }
@@ -442,7 +442,7 @@ $(function() {
         } else if(via === 'whatsapp') {
             url = `https://wa.me/?text=${encodeURIComponent(`${text} ${window.location.href}`)}`;
         }
-        
+
         stopAudio();
         window.open(url, '_blank');
     }
@@ -457,10 +457,12 @@ $(function() {
      * Redimensionar tela.
      */
     function resize() {
-        $('html').css('font-size', ((window.innerHeight / 960) * 16 * 1.1) + 'px');
+        $('html').css('font-size', ((window.innerHeight / 980) * 16 * 1.1) + 'px');
     }
 
-    window.onresize = resize;
+    window.onresize = function() {
+        setTimeout(resize, 500);
+    };
 
     $inputSearch.on('input', updateOptions);
 
