@@ -6,4 +6,6 @@ RewriteRule ^music/?$ music.php [QSA,L,NC]
 RewriteRule ^list/?$ list.php [QSA,L,NC]
 RewriteRule ^daily/?$ game.php [QSA,L,NC]
 RewriteRule ^playlists/?$ playlists.php [QSA,L,NC]
+RewriteRule ^404/?$ 404.php [QSA,L,NC]
 RewriteRule ^(commands|data|functions)(/|$) - [F,L]
+ErrorDocument 404 /404

@@ -11,6 +11,10 @@ input::placeholder {
     color: #f1f1f1 !important;
 }
 
+.favorite {
+    --bs-border-width: 2px;
+}
+
 .guesses {
     display: flex;
     flex-flow: column;
@@ -195,4 +199,20 @@ h2 {
     width: 2.1875rem;
     background-position: center;
     vertical-align: middle;
+}
+
+.btn-outline-light:disabled {
+    --bs-btn-disabled-color: white;
+    --bs-btn-disabled-border-color: white;
+}
+
+.modal-content {
+    --bs-modal-bg: transparent;
+    --bs-modal-border-width: 1px;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.modal-backdrop.show {
+    --bs-backdrop-opacity: 0.6;
 }

@@ -3,8 +3,6 @@
 require_once __DIR__ . '/functions/database.php';
 require_once __DIR__ . '/functions/curl.php';
 
-$db = db_connect();
-
 $playlist_id = $_GET['playlist_id'] ?? null;
 
 $meme_mode = false;

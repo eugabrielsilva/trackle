@@ -2,11 +2,7 @@
 
 require_once __DIR__ . '/functions/database.php';
 
-$db = db_connect();
 $song_count = db_query($db, 'SELECT COUNT(DISTINCT deezer_id) AS count FROM songs')[0]['count'];
-
-$folder = trim(mb_substr($_SERVER['PHP_SELF'], 0, mb_strpos($_SERVER['PHP_SELF'], '/index.php')), '/');
-$baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/' . $folder . (!empty($folder) ? '/' : '');
 
 ?>
 

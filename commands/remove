@@ -4,8 +4,6 @@ require_once __DIR__ . '/../functions/database.php';
 
 $id = $argv[1] ?? null;
 
-$db = db_connect();
-
 if (!empty($id)) {
     // Obter playlist
     $playlist = db_query($db, 'SELECT * FROM playlists WHERE deezer_id = :deezer_id', [

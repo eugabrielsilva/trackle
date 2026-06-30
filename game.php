@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/functions/database.php';
-$db = db_connect();
 
 if (!empty($_GET['playlist_id'])) {
     $playlist = db_query($db, 'SELECT * FROM playlists WHERE id = :id', [
@@ -9,7 +8,7 @@ if (!empty($_GET['playlist_id'])) {
     ])[0] ?? null;
 
     if (empty($playlist)) {
-        header('Location: ./');
+        header('Location: ../404');
         exit;
     }
 } else {
@@ -18,9 +17,6 @@ if (!empty($_GET['playlist_id'])) {
         'name' => 'Desafio Diário',
     ];
 }
-
-$folder = trim(mb_substr($_SERVER['PHP_SELF'], 0, mb_strpos($_SERVER['PHP_SELF'], '/game.php')), '/');
-$baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/' . $folder . (!empty($folder) ? '/' : '');
 
 ?>
 
@@ -84,7 +80,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                     <h1 class="mb-2" id="modal-title">Você acertou! 🎉</h1>
                     <h5 id="streak" class="mb-4">Sequência atual: 0</h5>
                     <a href="" id="result-url" class="d-block text-decoration-none text-white" target="_blank">
-                        <img src="" id="result-img" class="w-100 img-cover mb-4">
+                        <img src="" id="result-img" class="w-100 img-cover rounded-4 mb-4">
                         <h4 id="result-name"></h4>
                         <h5 class="mb-4" id="result-artist"></h5>
                     </a>
@@ -95,7 +91,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                                 Jogar novamente
                             </button>
                         <?php else : ?>
-                            <button class="btn btn-outline-success btn-lg" disabled>
+                            <button class="btn btn-outline-light btn-lg" disabled>
                                 Próximo em <span id="countdown">00:00:00</span>
                             </button>
                         <?php endif; ?>
@@ -118,13 +114,13 @@ $baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_
                     <h5 class="mb-4">Compartilhar</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                     <div class="d-flex justify-content-center gap-3">
-                        <button class="btn btn-lg btn-dark btn-share" data-via="x">
+                        <button class="btn btn-lg btn-dark btn-share" data-via="x" data-tooltip title="X (TWITTER)">
                             <i class="fab fa-x-twitter"></i>
                         </button>
-                        <button class="btn btn-lg btn-info btn-share" data-via="facebook">
+                        <button class="btn btn-lg btn-info btn-share" data-via="facebook" data-tooltip title="FACEBOOK">
                             <i class="fab fa-facebook"></i>
                         </button>
-                        <button class="btn btn-lg btn-success btn-share" data-via="whatsapp">
+                        <button class="btn btn-lg btn-success btn-share" data-via="whatsapp" data-tooltip title="WHATSAPP">
                             <i class="fab fa-whatsapp"></i>
                         </button>
                     </div>

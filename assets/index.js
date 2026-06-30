@@ -95,7 +95,7 @@ $(function() {
                 saveFavorites();
             }).toggleClass('active', favorites.includes(playlist.id));
 
-            $item.removeClass('d-none');
+            $item.toggleClass('favorite', favorites.includes(playlist.id)).removeClass('d-none');
 
             $playlists.append($item);
         });

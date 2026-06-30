@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/functions/database.php';
 
-$db = db_connect();
-
 $playlists = db_query($db, 'SELECT * FROM playlists ORDER BY name ASC');
 
 array_unshift($playlists, [

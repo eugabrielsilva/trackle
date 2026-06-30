@@ -7,8 +7,6 @@ $id = $argv[1] ?? null;
 
 $url_playlist = 'https://api.deezer.com/playlist/';
 
-$db = db_connect();
-
 if (!empty($id)) {
     echo 'Adicionando playlist: ' . $id;
 
