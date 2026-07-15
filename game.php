@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/functions/database.php';
 
-if (!empty($_GET['playlist_id'])) {
-    $playlist = db_query($db, 'SELECT * FROM playlists WHERE id = :id', [
-        ':id' => $_GET['playlist_id']
+if (!empty($_GET['playlist_slug'])) {
+    $playlist = db_query($db, 'SELECT * FROM playlists WHERE slug = :slug', [
+        ':slug' => $_GET['playlist_slug']
     ])[0] ?? null;
 
     if (empty($playlist)) {

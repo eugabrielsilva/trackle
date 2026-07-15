@@ -41,9 +41,10 @@ function updatePlaylist($playlist, $url_playlist, $db)
     }
 
     // Atualiza a playlist
-    db_query($db, 'UPDATE playlists SET name = :name, picture_url = :picture_url WHERE id = :id', [
+    db_query($db, 'UPDATE playlists SET name = :name, slug = :slug, picture_url = :picture_url WHERE id = :id', [
         ':id' => $playlist['id'],
         ':name' => $data['title'],
+        ':slug' => slug($data['title']),
         ':picture_url' => $data['picture_big'],
     ]);
 
@@ -62,13 +63,13 @@ function updatePlaylist($playlist, $url_playlist, $db)
         if (!empty($song[0])) {
             db_query($db, 'UPDATE songs SET name = :name, artist = :artist, picture_url = :picture_url WHERE id = :id', [
                 ':id' => $song[0]['id'],
-                ':name' => $track['title'],
+                ':name' => $track['title_short'] ?? $track['title'],
                 ':artist' => $track['artist']['name'],
                 ':picture_url' => $track['album']['cover_big'],
             ]);
         } else {
             db_query($db, 'INSERT INTO songs (name, artist, playlist_id, deezer_id, picture_url) VALUES (:name, :artist, :playlist_id, :deezer_id, :picture_url)', [
-                ':name' => $track['title'],
+                ':name' => $track['title_short'] ?? $track['title'],
                 ':artist' => $track['artist']['name'],
                 ':playlist_id' => $playlist['id'],
                 ':deezer_id' => $track['id'],

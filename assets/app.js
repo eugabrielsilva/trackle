@@ -315,6 +315,8 @@ $(function() {
             skipped: false
         });
 
+        options = options.filter(option => option.deezer_id !== selectedOption.deezer_id);
+
         finishGuess();
     }
 

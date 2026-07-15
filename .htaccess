@@ -1,10 +1,10 @@
 Options -Indexes -MultiViews
 
 RewriteEngine On
-RewriteRule ^playlist/([0-9]+)/?$ game.php?playlist_id=$1 [QSA,L,NC]
+RewriteRule ^playlist/([a-z-0-9]+)/?$ game.php?playlist_slug=$1 [QSA,L,NC]
 RewriteRule ^music/?$ music.php [QSA,L,NC]
 RewriteRule ^list/?$ list.php [QSA,L,NC]
-RewriteRule ^daily/?$ game.php [QSA,L,NC]
+RewriteRule ^desafio-diario/?$ game.php [QSA,L,NC]
 RewriteRule ^playlists/?$ playlists.php [QSA,L,NC]
 RewriteRule ^404/?$ 404.php [QSA,L,NC]
 RewriteRule ^(commands|data|functions)(/|$) - [F,L]

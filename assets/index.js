@@ -45,8 +45,8 @@ $(function() {
      * Carregar playlists.
      */
     function loadPlaylists() {
-        $.getJSON('playlists', response => {
-            playlists = response;
+        $.get('playlists', response => {
+            playlists = JSON.parse(atob(response));
             updatePlaylists();
         });
     }
@@ -83,7 +83,7 @@ $(function() {
             const $item = $baseItem.clone();
 
             $item.find('img').attr('src', playlist.picture_url).attr('alt', playlist.name).attr('title', playlist.name);
-            $item.find('a').attr('href', playlist.id === 'daily' ? 'daily' : `playlist/${playlist.id}`);
+            $item.find('a').attr('href', playlist.id === 'daily' ? 'desafio-diario' : `playlist/${playlist.slug}`);
 
             $item.find('.btn-favorite').on('click', function() {
                 if(favorites.includes(playlist.id)) {

@@ -10,5 +10,5 @@ array_unshift($playlists, [
     'picture_url' => 'assets/daily.png',
 ]);
 
-header('Content-Type: application/json');
-echo json_encode($playlists, JSON_NUMERIC_CHECK);
+header('Content-Type: application/octet-stream');
+echo base64_encode(json_encode($playlists, JSON_NUMERIC_CHECK));

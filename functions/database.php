@@ -35,4 +35,21 @@ function db_query($db, $sql, $params = [])
     return $stmt->fetchAll();
 }
 
+function stripAccents($string)
+{
+    $accents = 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ';
+    $replace = 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY';
+    $accentsArray = preg_split('//u', $accents, -1, PREG_SPLIT_NO_EMPTY);
+    $replaceArray = str_split($replace);
+    return str_replace($accentsArray, $replaceArray, $string);
+}
+
+function slug($string, $separator = '-', $keepOther = false)
+{
+    $string = stripAccents(mb_strtolower($string));
+    $string = str_replace(' ', $separator, $string);
+    $string = preg_replace('/[^a-zA-Z0-9' . preg_quote($separator) . ']/u', preg_quote($keepOther ? $separator : '', '/'), $string);
+    return $string;
+}
+
 $db = db_connect();
