@@ -8,7 +8,7 @@ Baseado no finado **Heardle**, o objetivo do jogo é acertar a música em no má
 
 ## Jogar
 
-Jogue online em [https://gabrielsilva.dev.br/trackle](https://gabrielsilva.dev.br/trackle)
+Jogue online em [https://trackle.rf.gd](https://trackle.rf.gd)
 
 ## Tecnologias
 
