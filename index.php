@@ -42,7 +42,10 @@ $song_count = db_query($db, 'SELECT COUNT(DISTINCT deezer_id) AS count FROM song
                         </div>
                     </div>
                 </div>
-                <h5 class="mt-5"><?= number_format($song_count, 0, '', '.') ?> músicas disponíveis e subindo!</h5>
+                <h5 class="mt-5">
+                    <i class="fas fa-music me-1"></i>
+                    <?= number_format($song_count, 0, '', '.') ?> músicas disponíveis e subindo!
+                </h5>
                 <small class="d-block mt-4 text-muted">
                     Este jogo é gratuito e utiliza dados fornecidos pela API do Deezer. Todos os direitos sobre as obras pertencem aos seus respectivos artistas e gravadoras. Desenvolvido por <a class="text-secondary" href="https://gabrielsilva.dev.br" target="_blank">Gabriel Silva</a>
                 </small>

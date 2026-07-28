@@ -8,7 +8,7 @@ if (!empty($_GET['playlist_slug'])) {
     ])[0] ?? null;
 
     if (empty($playlist)) {
-        header('Location: ../404');
+        header('Location: ./404');
         exit;
     }
 } else {

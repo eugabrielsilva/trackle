@@ -83,7 +83,7 @@ $(function() {
             const $item = $baseItem.clone();
 
             $item.find('img').attr('src', playlist.picture_url).attr('alt', playlist.name).attr('title', playlist.name);
-            $item.find('a').attr('href', playlist.id === 'daily' ? 'desafio-diario' : `playlist/${playlist.slug}`);
+            $item.find('a').attr('href', playlist.id === 'daily' ? 'desafio-diario' : playlist.slug);
 
             $item.find('.btn-favorite').on('click', function() {
                 if(favorites.includes(playlist.id)) {
