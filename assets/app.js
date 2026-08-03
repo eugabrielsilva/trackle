@@ -154,8 +154,11 @@ $(function() {
                 answer = JSON.parse(atob(musicResponse));
                 audio = new Audio(answer.preview_url);
                 audio.volume = volume;
+                audio.load();
 
-                $btnPlay.prop('disabled', false).html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
+                audio.addEventListener('canplaythrough', () => {
+                    $btnPlay.prop('disabled', false).html(`<i class="far fa-play-circle me-2"></i>Ouvir ${currentGuess}s`);
+                }, {once: true});
 
                 $.get(`list?playlist_id=${playlistId}`, listResponse => {
                     options = JSON.parse(atob(listResponse));
@@ -216,7 +219,7 @@ $(function() {
 
             if(createTimeout) {
                 $btnPlay.html('<span class="audio-playing me-3"></span>Parar');
-                audioTimeout = setTimeout(stopAudio, currentGuess * 1000);
+                audioTimeout = setTimeout(stopAudio, (currentGuess + 0.2) * 1000);
             }
         }
     }
