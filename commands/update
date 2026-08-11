@@ -49,6 +49,8 @@ function updatePlaylist($playlist, $url_playlist, $db)
     ]);
 
     // Atualiza as músicas da playlist
+    $track_ids = [];
+
     foreach ($data['tracks']['data'] as $track) {
         if (empty($track['preview'])) {
             continue;
@@ -61,21 +63,33 @@ function updatePlaylist($playlist, $url_playlist, $db)
 
         // Atualiza ou cria a música
         if (!empty($song[0])) {
-            db_query($db, 'UPDATE songs SET name = :name, artist = :artist, picture_url = :picture_url WHERE id = :id', [
+            db_query($db, 'UPDATE songs SET name = :name, artist = :artist, picture_url = :picture_url, album = :album WHERE id = :id', [
                 ':id' => $song[0]['id'],
                 ':name' => $track['title_short'] ?? $track['title'],
                 ':artist' => $track['artist']['name'],
                 ':picture_url' => $track['album']['cover_big'],
+                ':album' => $track['album']['title'] ?? '',
             ]);
         } else {
-            db_query($db, 'INSERT INTO songs (name, artist, playlist_id, deezer_id, picture_url) VALUES (:name, :artist, :playlist_id, :deezer_id, :picture_url)', [
+            db_query($db, 'INSERT INTO songs (name, artist, playlist_id, deezer_id, picture_url, album) VALUES (:name, :artist, :playlist_id, :deezer_id, :picture_url, :album)', [
                 ':name' => $track['title_short'] ?? $track['title'],
                 ':artist' => $track['artist']['name'],
                 ':playlist_id' => $playlist['id'],
                 ':deezer_id' => $track['id'],
                 ':picture_url' => $track['album']['cover_big'],
+                ':album' => $track['album']['title'] ?? '',
             ]);
         }
+
+        $track_ids[] = $track['id'];
+    }
+
+    // Remove músicas que não estão na playlist
+    if (!empty($track_ids)) {
+        $placeholders = implode(',', array_fill(0, count($track_ids), '?'));
+        $sql = "DELETE FROM songs WHERE playlist_id = ? AND deezer_id NOT IN ($placeholders)";
+        $params = array_merge([$playlist['id']], $track_ids);
+        db_query($db, $sql, $params);
     }
 
     echo ' - OK' . PHP_EOL;

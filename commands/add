@@ -49,19 +49,21 @@ if (!empty($id)) {
 
         // Atualiza ou cria a música
         if (!empty($song[0])) {
-            db_query($db, 'UPDATE songs SET name = :name, artist = :artist, picture_url = :picture_url WHERE id = :id', [
+            db_query($db, 'UPDATE songs SET name = :name, artist = :artist, picture_url = :picture_url, album = :album WHERE id = :id', [
                 ':id' => $song[0]['id'],
                 ':name' => $track['title_short'] ?? $track['title'],
                 ':artist' => $track['artist']['name'],
                 ':picture_url' => $track['album']['cover_big'],
+                ':album' => $track['album']['title'] ?? '',
             ]);
         } else {
-            db_query($db, 'INSERT INTO songs (name, artist, playlist_id, deezer_id, picture_url) VALUES (:name, :artist, :playlist_id, :deezer_id, :picture_url)', [
+            db_query($db, 'INSERT INTO songs (name, artist, playlist_id, deezer_id, picture_url, album) VALUES (:name, :artist, :playlist_id, :deezer_id, :picture_url, :album)', [
                 ':name' => $track['title_short'] ?? $track['title'],
                 ':artist' => $track['artist']['name'],
                 ':playlist_id' => $playlist['id'],
                 ':deezer_id' => $track['id'],
                 ':picture_url' => $track['album']['cover_big'],
+                ':album' => $track['album']['title'] ?? '',
             ]);
         }
     }
